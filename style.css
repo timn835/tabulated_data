@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    font-size: 10px;
+}
+
+.header {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+  
+.field-select {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+  
+.field-select label {
+    margin-right: 10px;
+}
+  
+.field-select select {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+}
+  
+.display-select {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+  
+.display-select label {
+    margin-right: 10px;
+}
+  
+.display-select select {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+  
+.search-box input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333;
+    margin-right: 5px;
+}
+  
+.search-box button {
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+  
+.search-box button:hover {
+    transform: translateY(-2px);
+}
+  
+.sort-buttons button {
+    margin: 0 5px;
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+  
+.sort-buttons button:hover {
+    transform: translateY(-2px);
+}
+  
+#up-button {
+    margin-right: 5px;
+}
+  
+#down-button {
+    margin-left: 5px;
+}
+  
+#container {
+    margin: 0 auto;
+    text-align: center;
+    width: 90vw;
+}
+
+.form-select {
+    width: 30%;
+}
+
+.title {
+    font-weight: 800;
+}
+.row {
+    display: flex;
+}
+
+.row:not(.title) {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.row:not(.title):hover {
+    background-color: #e6f2ff;
+}
+
+.cell {
+    box-sizing: border-box;
+    padding: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.hide {
+  display: none!important;
+}
+
+.inactive {
+  display: none!important;
+}
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#pagination button:hover {
+  background-color: #ddd;
+}
+
+#pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff0000;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.user-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
