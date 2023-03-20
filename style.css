@@ -223,6 +223,11 @@ body {
   font-size: 16px;
   margin: 5px 0;
 }
+
+.draggable.dragging {
+  opacity: 0.5;
+}
+
 .spinner-container {
   width: 100vw;
   height: 100vh;
@@ -230,6 +235,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .spinner {
     width: 50px;
     height: 50px;

@@ -59,7 +59,7 @@ function initializePage() {
     //we now fill the table with information
     deals.forEach((deal, idx) => {
         let row = document.createElement('div');
-        row.classList.add('row');
+        row.classList.add('row', 'draggable');
         titles.forEach(title => {
             let cell = document.createElement('div');
             cell.classList.add('cell');
@@ -71,9 +71,23 @@ function initializePage() {
         });
         deal['element'] = row; //we add a reference from the array to the html element
         row.id = idx; //we add a reference from the html element to the array
+        row.draggable = true;
         row.addEventListener('click', (e) => {
             fillModalInfo(e.target.parentNode.id);
             modalContainer.classList.remove('hide');
+        });
+        row.addEventListener('dragstart', () => {
+            row.classList.add('dragging');
+        });
+        row.addEventListener('dragend', e => {
+            e.preventDefault();
+            const afterRow = getDragAfterRow(e.clientY);
+            if(afterRow == null) {
+                container.appendChild(row);
+            } else {
+                container.insertBefore(row, afterRow)
+            }
+            row.classList.remove('dragging');
         });
         container.appendChild(row);
     });
@@ -180,6 +194,18 @@ function fillModalInfo(idx) {
     element.src = deals[idx]['avatar'];
 }
 
+function getDragAfterRow(y) {
+    const draggableRows = [...container.querySelectorAll('.draggable:not(.dragging)')];
+    return draggableRows.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if(offset < 0 && offset > closest.offset) {
+            return {offset: offset, element: child};
+        }
+        return closest
+    }, {offset: Number.NEGATIVE_INFINITY}).element;
+}
+
 fetch(apiUrl)
     .then(response => response.json())
     .then(json => {
@@ -231,4 +257,4 @@ modalContainer.addEventListener('click', (event) => {
     if (event.target === modalContainer || event.target.classList.contains('close-button')) {
       modalContainer.classList.add('hide');
     }
-  });
+});
