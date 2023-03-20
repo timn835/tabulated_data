@@ -5,11 +5,12 @@ const apiUrl = 'https://random-data-api.com/api/v2/users?size=100';
 const maxAmount = 100000;
 const deals = [];
 
+const spinner = document.querySelector('.spinner-container');
+const header = document.querySelector('.header');
 const container = document.getElementById('container');
 const selectedField = document.getElementById('field-select');
 const sortIncreasing = document.getElementById('up-button');
 const sortDecreasing = document.getElementById('down-button');
-const searchButton = document.getElementById('search-button');
 const searchTerm = document.getElementById('search-term');
 const selectedPagination = document.getElementById('display-select');
 const modalContainer = document.getElementById('modal-container');
@@ -160,21 +161,21 @@ function fillModalInfo(idx) {
     let element = document.getElementById('modal_name');
     element.innerText = deals[idx]['Name'];
     element = document.getElementById('modal_id');
-    element.innerText += deals[idx]['Id'];
+    element.innerText = 'Id: ' + deals[idx]['Id'];
     element = document.getElementById('modal_address');
-    element.innerText += deals[idx]['Address'];
+    element.innerText = 'Address: ' + deals[idx]['Address'];
     element = document.getElementById('modal_phone');
-    element.innerText += deals[idx]['telephone'];
+    element.innerText = 'Telephone: ' + deals[idx]['telephone'];
     element = document.getElementById('modal_email');
-    element.innerText += deals[idx]['email'];
+    element.innerText = 'Email: ' + deals[idx]['email'];
     element = document.getElementById('modal_employment');
-    element.innerText += deals[idx]['employment'];
+    element.innerText = 'Occupation: ' + deals[idx]['employment'];
     element = document.getElementById('modal_contact');
-    element.innerText += deals[idx]['Contact Name'];
+    element.innerText = 'Contact name: ' + deals[idx]['Contact Name'];
     element = document.getElementById('modal_amount');
-    element.innerText += formatter.format(deals[idx]['Amount ($)']);
+    element.innerText = 'Transaction amount: ' + formatter.format(deals[idx]['Amount ($)']);
     element = document.getElementById('modal_cc');
-    element.innerText += deals[idx]['credit_card'];
+    element.innerText = 'Credit card used for transaction: ' + deals[idx]['credit_card'];
     element = document.getElementById('modal_avatar');
     element.src = deals[idx]['avatar'];
 }
@@ -198,6 +199,8 @@ fetch(apiUrl)
         })
         initializePage();
         paginate();
+        header.classList.remove('hide');
+        spinner.classList.add('hide');
     });
 
 sortIncreasing.addEventListener('click', () => {
@@ -210,7 +213,7 @@ sortDecreasing.addEventListener('click', () => {
     paginate();
 });
 
-searchButton.addEventListener('click', () => {
+searchTerm.addEventListener('input', () => {
     deals.forEach(deal => {
         deal['element'].classList.remove('hide');
         if(!searchTermPresent(searchTerm.value, deal)) {

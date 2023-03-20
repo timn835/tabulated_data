@@ -10,7 +10,10 @@
     <title>Deals page</title>
 </head>
 <body>
-    <div class="header">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+    </div>
+    <div class="header hide">
         <div class="field-select">
           <label for="field-select">Sort by:</label>
           <select id="field-select">
@@ -35,7 +38,6 @@
         </div>
         <div class="search-box">
             <input type="text" id="search-term" placeholder="Search...">
-            <button id="search-button">&#x1F50D;</button>
         </div>
     </div>
     <div id="modal-container" class="modal-container hide">
@@ -45,14 +47,14 @@
           <img src="https://via.placeholder.com/150" alt="User Avatar" id="modal_avatar">
           <div class="user-details">
             <h2 id="modal_name"></h2>
-            <p id="modal_id">Id: </p>
-            <p id="modal_address">Address: </p>
-            <p id="modal_phone">Telephone: </p>
-            <p id="modal_email">Email: </p>
-            <p id="modal_employment">Occupation: </p>
-            <p id="modal_contact">Contact name: </p>
-            <p id="modal_amount">Transaction amount: </p>
-            <p id="modal_cc">Credit card used for transaction: </p>
+            <p id="modal_id"></p>
+            <p id="modal_address"></p>
+            <p id="modal_phone"></p>
+            <p id="modal_email"></p>
+            <p id="modal_employment"></p>
+            <p id="modal_contact"></p>
+            <p id="modal_amount"></p>
+            <p id="modal_cc"></p>
           </div>
         </div>
       </div>
