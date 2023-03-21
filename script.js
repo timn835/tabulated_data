@@ -8,9 +8,7 @@ const deals = [];
 const spinner = document.querySelector('.spinner-container');
 const header = document.querySelector('.header');
 const container = document.getElementById('container');
-const selectedField = document.getElementById('field-select');
-const sortIncreasing = document.getElementById('up-button');
-const sortDecreasing = document.getElementById('down-button');
+const sortButtons = document.querySelectorAll('.sort-buttons button');
 const searchTerm = document.getElementById('search-term');
 const selectedPagination = document.getElementById('display-select');
 const modalContainer = document.getElementById('modal-container');
@@ -20,7 +18,7 @@ let rowsPerPage = 10;
 let totalPages = Math.ceil(rows.length / rowsPerPage);
 let pagination = document.getElementById('pagination');
 
-const cellWidth = 100 / (titles.length) + "%";
+const cellWidth = "20%"; //we keep this width static for now
 const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -44,19 +42,7 @@ function getContactName(data, i) {
 }
 
 function initializePage() {
-    //we first create the title row
-    let titleRow = document.createElement('div');
-    titleRow.classList.add('row', 'title');
-    titles.forEach(title => {
-        let cell = document.createElement('div');
-        cell.classList.add('cell');
-        cell.innerText = title;
-        cell.style.width = cellWidth;
-        titleRow.appendChild(cell);
-    });
-    container.appendChild(titleRow);
-    
-    //we now fill the table with information
+    //we fill the table with information
     deals.forEach((deal, idx) => {
         let row = document.createElement('div');
         row.classList.add('row', 'draggable');
@@ -102,7 +88,9 @@ function sortElements(increasing, attribute) {
     }
     for(let i = deals.length - 1; i > 0; i--) {
         container.insertBefore(deals[i - 1]['element'], deals[i]['element']);
+        deals[i]['element'].id = i;
     }
+    deals[0]['element'].id= 0;
 }
 
 function searchTermPresent(term, deal) {
@@ -229,15 +217,55 @@ fetch(apiUrl)
         spinner.classList.add('hide');
     });
 
-sortIncreasing.addEventListener('click', () => {
-    sortElements(true, selectedField.value);
-    paginate();
+sortButtons.forEach(button => {
+    switch (button.id) {
+        case 'up-id-button':
+            button.addEventListener('click', () => {
+                sortElements(true, 'Id');
+                paginate();
+            });
+            break;
+        case 'down-id-button':
+            button.addEventListener('click', () => {
+                sortElements(false, 'Id');
+                paginate();
+            });
+            break;
+        case 'up-name-button':
+            button.addEventListener('click', () => {
+                sortElements(true, 'Name');
+                paginate();
+            });
+            break;
+        case 'down-name-button':
+            button.addEventListener('click', () => {
+                sortElements(false, 'Name');
+                paginate();
+            });
+            break;
+        case 'up-amount-button':
+            button.addEventListener('click', () => {
+                sortElements(true, 'Amount ($)');
+                paginate();
+            });
+            break;
+        case 'down-amount-button':
+            button.addEventListener('click', () => {
+                sortElements(false, 'Amount ($)');
+                paginate();
+            });
+            break;
+    }
 });
+// sortIncreasing.addEventListener('click', () => {
+//     sortElements(true, selectedField.value);
+//     paginate();
+// });
 
-sortDecreasing.addEventListener('click', () => {
-    sortElements(false, selectedField.value);
-    paginate();
-});
+// sortDecreasing.addEventListener('click', () => {
+//     sortElements(false, selectedField.value);
+//     paginate();
+// });
 
 searchTerm.addEventListener('input', () => {
     deals.forEach(deal => {
@@ -258,3 +286,7 @@ modalContainer.addEventListener('click', (event) => {
       modalContainer.classList.add('hide');
     }
 });
+
+container.addEventListener('dragover', e => {
+    e.preventDefault();
+})
