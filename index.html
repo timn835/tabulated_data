@@ -28,21 +28,31 @@
             <input type="text" id="search-term" placeholder="Search...">
         </div>
     </div>
-    <div id="modal-container" class="modal-container hide">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <div class="user-profile">
-          <img src="https://via.placeholder.com/150" alt="User Avatar" id="modal_avatar">
-          <div class="user-details">
-            <h2 id="modal_name"></h2>
-            <p id="modal_id"></p>
-            <p id="modal_address"></p>
-            <p id="modal_phone"></p>
-            <p id="modal_email"></p>
-            <p id="modal_employment"></p>
-            <p id="modal_contact"></p>
-            <p id="modal_amount"></p>
-            <p id="modal_cc"></p>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-4">
+                <img src="" class="img-fluid rounded-circle" id="logo-info">
+              </div>
+              <div class="col-sm-8">
+                <p id="id-info"></p>
+                <p id="address-info"></p>
+                <p id="telephone-info"></p>
+                <p id="email-info"></p>
+                <p id="occupation-info"></p>
+                <p id="contact-info"></p>
+                <p id="amount-info"></p>
+                <p id="cc-info"></p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

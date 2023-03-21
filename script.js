@@ -11,7 +11,7 @@ const container = document.getElementById('container');
 const sortButtons = document.querySelectorAll('.sort-buttons button');
 const searchTerm = document.getElementById('search-term');
 const selectedPagination = document.getElementById('display-select');
-const modalContainer = document.getElementById('modal-container');
+const modalContainer = document.getElementById('exampleModal');
 
 let rows = container.querySelectorAll('.row:not(.title):not(.hide)');
 let rowsPerPage = 10;
@@ -58,9 +58,10 @@ function initializePage() {
         deal['element'] = row; //we add a reference from the array to the html element
         row.id = idx; //we add a reference from the html element to the array
         row.draggable = true;
+        row.setAttribute("data-toggle", "modal");
+        row.setAttribute("data-target", "#exampleModal");
         row.addEventListener('click', (e) => {
             fillModalInfo(e.target.parentNode.id);
-            modalContainer.classList.remove('hide');
         });
         row.addEventListener('dragstart', () => {
             row.classList.add('dragging');
@@ -160,25 +161,25 @@ function showPage(pageNum) {
 }
 
 function fillModalInfo(idx) {
-    let element = document.getElementById('modal_name');
+    let element = document.getElementById('exampleModalLabel');
     element.innerText = deals[idx]['Name'];
-    element = document.getElementById('modal_id');
-    element.innerText = 'Id: ' + deals[idx]['Id'];
-    element = document.getElementById('modal_address');
-    element.innerText = 'Address: ' + deals[idx]['Address'];
-    element = document.getElementById('modal_phone');
-    element.innerText = 'Telephone: ' + deals[idx]['telephone'];
-    element = document.getElementById('modal_email');
-    element.innerText = 'Email: ' + deals[idx]['email'];
-    element = document.getElementById('modal_employment');
-    element.innerText = 'Occupation: ' + deals[idx]['employment'];
-    element = document.getElementById('modal_contact');
-    element.innerText = 'Contact name: ' + deals[idx]['Contact Name'];
-    element = document.getElementById('modal_amount');
-    element.innerText = 'Transaction amount: ' + formatter.format(deals[idx]['Amount ($)']);
-    element = document.getElementById('modal_cc');
-    element.innerText = 'Credit card used for transaction: ' + deals[idx]['credit_card'];
-    element = document.getElementById('modal_avatar');
+    element = document.getElementById('id-info');
+    element.innerHTML = `<strong>ID:</strong> ${deals[idx]['Id']}`;
+    element = document.getElementById('address-info');
+    element.innerHTML = `<strong>Address:</strong> ${deals[idx]['Address']}`;
+    element = document.getElementById('telephone-info');
+    element.innerHTML = `<strong>Telephone:</strong> ${deals[idx]['telephone']}`;
+    element = document.getElementById('email-info');
+    element.innerHTML = `<strong>Email:</strong> ${deals[idx]['email']}`;
+    element = document.getElementById('occupation-info');
+    element.innerHTML = `<strong>Occupation:</strong> ${deals[idx]['employment']}`;
+    element = document.getElementById('contact-info');
+    element.innerHTML = `<strong>Contact name:</strong> ${deals[idx]['Contact Name']}`;
+    element = document.getElementById('amount-info');
+    element.innerHTML = `<strong>Transaction amount ($):</strong> ${formatter.format(deals[idx]['Amount ($)'])}`;
+    element = document.getElementById('cc-info');
+    element.innerHTML = `<strong>Credit card number:</strong> ${deals[idx]['credit_card']}`;
+    element = document.getElementById('logo-info');
     element.src = deals[idx]['avatar'];
 }
 
@@ -257,15 +258,6 @@ sortButtons.forEach(button => {
             break;
     }
 });
-// sortIncreasing.addEventListener('click', () => {
-//     sortElements(true, selectedField.value);
-//     paginate();
-// });
-
-// sortDecreasing.addEventListener('click', () => {
-//     sortElements(false, selectedField.value);
-//     paginate();
-// });
 
 searchTerm.addEventListener('input', () => {
     deals.forEach(deal => {
@@ -281,12 +273,10 @@ selectedPagination.addEventListener('change', () => {
     paginate();
 });
 
-modalContainer.addEventListener('click', (event) => {
-    if (event.target === modalContainer || event.target.classList.contains('close-button')) {
-      modalContainer.classList.add('hide');
-    }
-});
-
 container.addEventListener('dragover', e => {
     e.preventDefault();
 })
+
+// Add the 'show' class to the modal container to make it appear
+modalContainer.classList.add("show");
+
